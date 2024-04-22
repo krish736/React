@@ -1,0 +1,8 @@
+.listItems{
+    display: flex;
+    
+}
+
+.eatBtn{
+    align-self: flex-end;
+}

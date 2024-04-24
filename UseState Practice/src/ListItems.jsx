@@ -1,6 +1,6 @@
 import styles from "./ListItems.module.css";
 
-const ListItems = ({ items }) => {
+const ListItems = ({ items ,handleBuyBtn}) => {
   return (
     <>
       {items.length > 0 ? (
@@ -8,7 +8,7 @@ const ListItems = ({ items }) => {
           {items.map((item, index) => (
             <div className={styles.listItems} key={index}>
               <li>{item}</li>
-              <button className={styles.eatBtn}>Eat</button>
+              <button className={styles.eatBtn} onClick={() => handleBuyBtn(index)}>Eat</button>
             </div>
           ))}
         </ul>

@@ -26,6 +26,10 @@ const List = () => {
     }
   };
 
+  const handleBuyBtn = (index) =>{
+    console.log(`bought ${items[index]}`)
+  }
+
   return (
     <>
       <input
@@ -40,7 +44,7 @@ const List = () => {
       <button className="addBtn" onClick={handleAddButtonClick}>
         Add
       </button>
-      <ListItems items={items} />
+      <ListItems items={items} handleBuyBtn={handleBuyBtn}/>
     </>
   );
 };

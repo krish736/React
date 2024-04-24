@@ -1,15 +1,43 @@
-function Input() {
+import { useState } from "react";
+
+function Input({ handleNewItem }) {
+  const [todoName, setTodoName] = useState("");
+  const [todoDate, setTodoDate] = useState("");
+
+  const handleNameInput = (event) => {
+    setTodoName(event.target.value);
+  };
+
+  const handleDateInput = (event) => {
+    setTodoDate(event.target.value);
+  };
+
+  const handleAddButton = () => {
+    handleNewItem(todoName, todoDate);
+    setTodoName("");
+    setTodoDate("");
+  };
+
   return (
     <>
-      <div class="row rows">
-        <div class="col-5">
-          <input type="text" placeholder="Enter TODO here" />
+      <div className="row rows">
+        <div className="col-5">
+          <input
+            type="text"
+            placeholder="Enter TODO here"
+            value={todoName}
+            onChange={handleNameInput}
+          />
         </div>
-        <div class="col-5">
-          <input type="date" name="" id="" />
+        <div className="col-5">
+          <input type="date" value={todoDate} onChange={handleDateInput} />
         </div>
-        <div class="col-1">
-          <button type="button" class="btn btn-success btns">
+        <div className="col-1">
+          <button
+            type="button"
+            className="btn btn-success btns"
+            onClick={handleAddButton}
+          >
             ADD
           </button>
         </div>

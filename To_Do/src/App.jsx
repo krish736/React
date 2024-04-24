@@ -1,26 +1,37 @@
+import React from "react";
 import Heading from "./Heading";
 import Input from "./Input";
 import "./App.css";
 import ListItems from "./ListItems";
+import { useState } from "react";
 
 function App() {
-  const todoItems = [
-    {
-      name: "Buy Milk",
-      date: "14-04-2024",
-    },
-    {
-      name: "GO TO College",
-      date: "14-04-2024",
-    },
-  ];
+  const [todoItems, setTodoItems] = useState([]);
+
+  const handleNewItem = (itemName, itemDate) => {
+    let newTodoItems = [...todoItems, { name: itemName, date: itemDate }];
+    setTodoItems(newTodoItems);
+  };
+
+  const handleDeleteItem = (todoItemName) => {
+    let newTodoItems = todoItems.filter((item) => item.name !== todoItemName);
+    setTodoItems(newTodoItems);
+  };
+
   return (
     <>
-      <center className="todo-container text-center">
+      <div className="todo-container text-center">
         <Heading />
-        <Input />
-        <ListItems props={todoItems}></ListItems>
-      </center>
+        <Input handleNewItem={handleNewItem} />
+        {todoItems.length > 0 ? (
+          <ListItems
+            todoItems={todoItems}
+            handleDeleteItem={handleDeleteItem}
+          />
+        ) : (
+          <p>No tasks added</p>
+        )}
+      </div>
     </>
   );
 }

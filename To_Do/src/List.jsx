@@ -1,13 +1,19 @@
 // import PropTypes from "prop-types";
 
-function List(props) {
+function List({ name, date ,handleDeleteItem}) {
   return (
     <>
-      <div class="row rows">
-        <div class="col-5">{props.name}</div>
-        <div class="col-5">{props.date}</div>
-        <div class="col-1 text-center">
-          <button type="button" class="btn btn-danger btns">
+      <div className="row rows">
+        <div className="col-5">{name}</div>
+        <div className="col-5">{date}</div>
+        <div className="col-1 text-center">
+          <button
+            type="button"
+            className="btn btn-danger btns"
+            onClick={() => {
+              handleDeleteItem(name);
+            }}
+          >
             DELETE
           </button>
         </div>

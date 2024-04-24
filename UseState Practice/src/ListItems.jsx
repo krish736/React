@@ -1,16 +1,20 @@
 import styles from "./ListItems.module.css";
-const ListItems = () => {
-  let items = ["Ghee", "Green Vegtables", "Fruits"];
+
+const ListItems = ({ items }) => {
   return (
     <>
-      <ul>
-        {items.map((item, index) => (
-          <div className={styles.listItems}>
-            <li key={index}>{item}</li>
-            <button className={styles.eatBtn}>Eat</button>
-          </div>
-        ))}
-      </ul>
+      {items.length > 0 ? (
+        <ul>
+          {items.map((item, index) => (
+            <div className={styles.listItems} key={index}>
+              <li>{item}</li>
+              <button className={styles.eatBtn}>Eat</button>
+            </div>
+          ))}
+        </ul>
+      ) : (
+        <p>No Healthy Items</p>
+      )}
     </>
   );
 };

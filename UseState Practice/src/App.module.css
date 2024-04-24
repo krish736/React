@@ -1,0 +1,11 @@
+.listContainer{
+    width: 250px;
+    margin: 50px auto;
+    border: 2px solid #5555;
+    text-align: center;
+}
+
+.heading{
+    font-weight: 500;
+    margin-bottom: 10px;
+}

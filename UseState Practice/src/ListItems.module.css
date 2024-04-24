@@ -1,8 +1,11 @@
-.listItems{
-    display: flex;
-    
+ul {
+    list-style-type: none; 
+    padding: 0; /* Remove padding */
+    margin: 0;
 }
 
-.eatBtn{
-    align-self: flex-end;
+.listItems{
+    display: flex;
+    justify-content: space-between;
+    margin: 5px;
 }

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { IoMdAddCircle } from "react-icons/io";
 
 function Input({ handleNewItem }) {
   const [todoName, setTodoName] = useState("");
@@ -13,9 +14,13 @@ function Input({ handleNewItem }) {
   };
 
   const handleAddButton = () => {
-    handleNewItem(todoName, todoDate);
-    setTodoName("");
-    setTodoDate("");
+    if (todoName.trim() !== "" && todoDate.trim() !== "") {
+      handleNewItem(todoName, todoDate);
+      setTodoName("");
+      setTodoDate("");
+    } else {
+      alert("Please enter both TODO and date.");
+    }
   };
 
   return (
@@ -38,7 +43,7 @@ function Input({ handleNewItem }) {
             className="btn btn-success btns"
             onClick={handleAddButton}
           >
-            ADD
+            <IoMdAddCircle />
           </button>
         </div>
       </div>

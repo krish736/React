@@ -1,4 +1,4 @@
-// import PropTypes from "prop-types";
+import { MdDelete } from "react-icons/md";
 
 function List({ name, date ,handleDeleteItem}) {
   return (
@@ -14,7 +14,7 @@ function List({ name, date ,handleDeleteItem}) {
               handleDeleteItem(name);
             }}
           >
-            DELETE
+            <MdDelete />
           </button>
         </div>
       </div>

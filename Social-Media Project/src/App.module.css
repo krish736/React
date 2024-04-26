@@ -1,14 +1,11 @@
 .appContainer{
     display: flex;
-    height: 100vh;
+    margin-left: 280px;
+    
 }
 
 .hero{
     display: flex;
     flex-direction: column;
     flex: 1;
-}
-
-.footer{
-    margin-top: auto;
 }

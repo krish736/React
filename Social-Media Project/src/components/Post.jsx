@@ -1,24 +1,47 @@
-import styles from "./Post.module.css"
-const Post = () => {
+import { useState } from "react";
+import styles from "./Post.module.css";
+import { AiFillLike } from "react-icons/ai";
+const Post = ({ post }) => {
+  const [likeStatus, setLikeStatus] = useState(false);
+  const [likes, setLikes] = useState(post.reaction);
+
+  const handleLike = () => {
+    setLikeStatus(!likeStatus);
+    if (!likeStatus) {
+      let getLikes = likes + 1;
+      setLikes(getLikes);
+    } else {
+      let goLikes = likes - 1;
+      setLikes(goLikes);
+    }
+  };
   return (
     <>
-    {/* style={{ width: "18rem" }} */}
-      <div className={`card ${styles.post}`} >
+      {/* style={{ width: "18rem" }} */}
+      <div className={`card ${styles.post}`}>
         <div className="card-body">
-          <h5 className="card-title">Card title</h5>
-          <h6 className="card-subtitle mb-2 text-body-secondary">
-            Card subtitle
-          </h6>
-          <p className="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
-          <a href="#" className="card-link">
-            Card link
-          </a>
-          <a href="#" className="card-link">
-            Another link
-          </a>
+          <h5 className="card-title">{post.title}</h5>
+          {post.tags.map((tag) => (
+            <span key={tag} className={`badge text-bg-success ${styles.tags}`}>
+              {tag}
+            </span>
+          ))}
+          <p className="card-text">{post.body}</p>
+          <button
+            type="button"
+            className={`btn ${likeStatus && "btn-primary"}`}
+            onClick={handleLike}
+          >
+            <AiFillLike />
+            <span className={`badge text-bg-secondary ${styles.span}`}>
+              {likes}
+            </span>
+          </button>
+          <span
+            className={`position-absolute top-0 start-0 translate-middle badge rounded-pill bg-primary ${styles.userid}`}
+          >
+            {post.userid}
+          </span>
         </div>
       </div>
     </>

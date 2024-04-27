@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./Sidebar.module.css";
 
-const SideBar = ({ SelectedPostArea }) => {
+const SideBar = ({ SelectedPostArea , SetSelectedPostArea}) => {
   return (
     <div
       className={`${styles.sidebar} d-flex flex-column flex-shrink-0 p-3 text-bg-dark`}
@@ -20,7 +20,7 @@ const SideBar = ({ SelectedPostArea }) => {
       <div className={styles.postOptions}>
         <hr />
         <ul className="nav nav-pills flex-column mb-auto">
-          <li className="nav-item">
+          <li className="nav-item" onClick={()=>{SetSelectedPostArea("View Post")}}>
             <a
               href="#"
               className={`nav-link text-white ${
@@ -34,7 +34,7 @@ const SideBar = ({ SelectedPostArea }) => {
               View Post
             </a>
           </li>
-          <li>
+          <li onClick={()=>{SetSelectedPostArea("Create Post")}}>
             <a
               href="#"
               className={`nav-link text-white ${

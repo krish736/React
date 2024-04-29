@@ -3,7 +3,7 @@ import styles from "./Post.module.css";
 import { AiFillLike } from "react-icons/ai";
 const Post = ({ post }) => {
   const [likeStatus, setLikeStatus] = useState(false);
-  const [likes, setLikes] = useState(post.reaction);
+  const [likes, setLikes] = useState(0);
 
   const handleLike = () => {
     setLikeStatus(!likeStatus);
@@ -21,11 +21,15 @@ const Post = ({ post }) => {
       <div className={`card ${styles.post}`}>
         <div className="card-body">
           <h5 className="card-title">{post.title}</h5>
-          {post.tags.map((tag) => (
-            <span key={tag} className={`badge text-bg-success ${styles.tags}`}>
-              {tag}
-            </span>
-          ))}
+          {post.tags &&
+            post.tags.map((tag) => (
+              <span
+                key={tag}
+                className={`badge text-bg-success ${styles.tags}`}
+              >
+                {tag}
+              </span>
+            ))}
           <p className="card-text">{post.body}</p>
           <button
             type="button"

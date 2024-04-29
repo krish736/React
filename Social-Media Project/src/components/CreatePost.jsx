@@ -1,9 +1,8 @@
 import { useContext, useRef } from "react";
 import styles from "./CreatePost.module.css";
-import {PostList }from "../store/post-list-store";
+import { PostList } from "../store/post-list-store";
 const CreatePost = () => {
-
-  const {addPost} = useContext(PostList)
+  const { addPost } = useContext(PostList);
 
   const useridELement = useRef();
   const postTitleELement = useRef();
@@ -11,17 +10,35 @@ const CreatePost = () => {
   const postTagsELement = useRef();
 
   const handlePostButton = () => {
-    const userid =  useridELement.current.value
-    const postTitle =  postTitleELement.current.value
-    const postBody =  postBodyELement.current.value
-    const postTags =  postTagsELement.current.value.split(" ")
+    const userid = useridELement.current.value;
+    const postTitle = postTitleELement.current.value;
+    const postBody = postBodyELement.current.value;
+    const postTags = postTagsELement.current.value.split(" ");
 
-    useridELement.current.value = ""
-    postTitleELement.current.value = ""
-    postBodyELement.current.value = ""
-    postTagsELement.current.value = ""
+    useridELement.current.value = "";
+    postTitleELement.current.value = "";
+    postBodyELement.current.value = "";
+    postTagsELement.current.value = "";
 
-    addPost(userid, postTitle, postBody, postTags )
+    fetch("https://dummyjson.com/posts/add", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        userId: userid,
+        title: postTitle,
+        body: postBody,
+        tags: postTags,
+        // id: Date.now(),
+        /* other post data */
+      }),
+    })
+      .then((res) => res.json())
+      .then((post) =>{
+        addPost(post);
+        console.log(post)
+      });
+
+    
   };
 
   return (

@@ -1,18 +1,17 @@
-import { createContext, useReducer } from "react";
+import { createContext, useReducer, useState, useEffect } from "react";
 
 export const PostList = createContext({
   postList: [],
   addPost: () => {},
-  addInitialPosts: () => {},
+  fetching: false,
 });
 
 const PostListReducer = (currPostList, action) => {
   let newPostList = currPostList;
   if (action.type === "ADD_POST") {
-    console.log("dispatched");
+    // console.log("dispatched");
     newPostList = [action.payload, ...currPostList];
-  } 
-  else if (action.type === "ADD_Initial_POST") {
+  } else if (action.type === "ADD_Initial_POST") {
     newPostList = action.payload.posts;
   }
   return newPostList;
@@ -24,12 +23,23 @@ const PostListProvider = ({ children }) => {
     // DEFAULT_POST_LIST
     []
   );
+
+  const [fetching, setFeching] = useState(false);
+
+  
+
+  // const handleInitaliseButton = () => {
+  //   fetch("https://dummyjson.com/posts")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       addInitialPosts(data.posts);
+  //     });
+  // };
   const addPost = (post) => {
-    console.log("add post called");
+    // console.log("add post called");
     dispatchPostList({
       type: "ADD_POST",
-      payload: 
-        post,
+      payload: post,
     });
   };
 
@@ -42,8 +52,32 @@ const PostListProvider = ({ children }) => {
     });
   };
 
+  useEffect(() => {
+    setFeching(true);
+
+    const controller = new AbortController();
+    const signal = controller.signal;
+    fetch("https://dummyjson.com/posts", { signal })
+      .then((res) => res.json())
+      .then((data) => {
+        addInitialPosts(data.posts);
+        setFeching(false);
+      });
+
+    return () => {
+      // console.log("useEffect Clean UP");
+      // controller.abort();
+    };
+  }, []);
+
   return (
-    <PostList.Provider value={{ postList: postList, addPost: addPost ,addInitialPosts:addInitialPosts }}>
+    <PostList.Provider
+      value={{
+        postList: postList,
+        addPost: addPost,
+        fetching: fetching,
+      }}
+    >
       {children}
     </PostList.Provider>
   );

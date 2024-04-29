@@ -1,5 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./Header.module.css";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -44,12 +45,16 @@ const Header = () => {
         </form> */}
 
           <div className="text-end">
+            <Link to="/Login">
             <button type="button" className="btn btn-outline-light me-2">
               Login
             </button>
+            </Link>
+            <Link to="/Sign-up">
             <button type="button" className="btn btn-primary">
               Sign-up
             </button>
+            </Link>
           </div>
         </div>
       </div>

@@ -1,8 +1,12 @@
 import { useContext, useRef } from "react";
 import styles from "./CreatePost.module.css";
 import { PostList } from "../store/post-list-store";
+import { useNavigate } from "react-router-dom";
+// import { Form, redirect } from "react-router-dom";
+
 const CreatePost = () => {
   const { addPost } = useContext(PostList);
+  const navigate = useNavigate();
 
   const useridELement = useRef();
   const postTitleELement = useRef();
@@ -33,12 +37,11 @@ const CreatePost = () => {
       }),
     })
       .then((res) => res.json())
-      .then((post) =>{
+      .then((post) => {
         addPost(post);
-        console.log(post)
+        // console.log(post)
+        navigate("/view-post");
       });
-
-    
   };
 
   return (
@@ -100,5 +103,25 @@ const CreatePost = () => {
     </div>
   );
 };
+
+
+// export async function CreatePostAction(data){
+//   const formData = await data.request.formData();
+//   const postData = Object.fromEntries(formData);
+//   postData.tags = postData.tags.split(" ");
+//   console.log(postData);
+
+//   fetch("https://dummyjson.com/posts/add", {
+//     method: "POST",
+//     headers: { "Content-Type": "application/json" },
+//     body: JSON.stringify(postData),
+//   })
+//     .then((res) => res.json())
+//     .then((post) => {
+//       console.log(post);
+//     });
+
+//   return redirect("/");
+// }
 
 export default CreatePost;
